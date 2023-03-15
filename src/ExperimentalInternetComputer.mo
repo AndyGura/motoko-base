@@ -63,7 +63,7 @@ module {
   /// ```motoko no-repl
   /// import IC "mo:base/ExperimentalInternetComputer";
   ///
-  /// let count = IC.countInstructionsAsync(func(): async () {
+  /// let count = IC.countInstructionsAsync(func(): async* () {
   ///   // ...
   /// });
   /// ```
