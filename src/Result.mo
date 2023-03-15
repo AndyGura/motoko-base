@@ -22,7 +22,7 @@ module {
   /// ```
   public type Result<Ok, Err> = {
     #ok : Ok;
-    #err : Err;
+    #err : Err
   };
 
   // Compares two Result's for equality.
@@ -37,10 +37,10 @@ module {
         eqOk(ok1, ok2)
       };
       case (#err(err1), #err(err2)) {
-        eqErr(err1, err2);
+        eqErr(err1, err2)
       };
-      case _ { false };
-    };
+      case _ { false }
+    }
   };
 
   // Compares two Results. `#ok` is larger than `#err`. This ordering is
@@ -59,8 +59,8 @@ module {
         compareErr(err1, err2)
       };
       case (#ok(_), _) { #greater };
-      case (#err(_), _) { #less };
-    };
+      case (#err(_), _) { #less }
+    }
   };
 
   /// Allows sequencing of `Result` values and functions that return
@@ -87,7 +87,7 @@ module {
   ) : Result<R2, Error> {
     switch x {
       case (#err(e)) { #err(e) };
-      case (#ok(r)) { y(r) };
+      case (#ok(r)) { y(r) }
     }
   };
 
@@ -104,10 +104,9 @@ module {
   ) : Result<Ok, Error> {
     switch result {
       case (#ok(ok)) { ok };
-      case (#err(err)) { #err(err) };
+      case (#err(err)) { #err(err) }
     }
   };
-
 
   /// Maps the `Ok` type/value, leaving any `Error` type/value unchanged.
   public func mapOk<Ok1, Ok2, Error>(
@@ -116,7 +115,7 @@ module {
   ) : Result<Ok2, Error> {
     switch x {
       case (#err(e)) { #err(e) };
-      case (#ok(r)) { #ok(f(r)) };
+      case (#ok(r)) { #ok(f(r)) }
     }
   };
 
@@ -126,8 +125,8 @@ module {
     f : Error1 -> Error2
   ) : Result<Ok, Error2> {
     switch x {
-      case (#err(e)) { #err (f(e)) };
-      case (#ok(r)) { #ok(r) };
+      case (#err(e)) { #err(f(e)) };
+      case (#ok(r)) { #ok(r) }
     }
   };
 
@@ -140,7 +139,7 @@ module {
   public func fromOption<R, E>(x : ?R, err : E) : Result<R, E> {
     switch x {
       case (?x) { #ok(x) };
-      case null { #err(err) };
+      case null { #err(err) }
     }
   };
 
@@ -153,7 +152,7 @@ module {
   public func toOption<R, E>(r : Result<R, E>) : ?R {
     switch r {
       case (#ok(x)) { ?x };
-      case (#err(_)) { null };
+      case (#err(_)) { null }
     }
   };
 
@@ -171,7 +170,7 @@ module {
   public func iterate<Ok, Err>(res : Result<Ok, Err>, f : Ok -> ()) {
     switch res {
       case (#ok(ok)) { f(ok) };
-      case _ {};
+      case _ {}
     }
   };
 
@@ -179,7 +178,7 @@ module {
   public func isOk(r : Result<Any, Any>) : Bool {
     switch r {
       case (#ok(_)) { true };
-      case (#err(_)) { false };
+      case (#err(_)) { false }
     }
   };
 
@@ -187,23 +186,23 @@ module {
   public func isErr(r : Result<Any, Any>) : Bool {
     switch r {
       case (#ok(_)) { false };
-      case (#err(_)) { true };
+      case (#err(_)) { true }
     }
   };
 
   /// Asserts that its argument is an `#ok` result, traps otherwise.
-  public func assertOk(r : Result<Any,Any>) {
-    switch(r) {
+  public func assertOk(r : Result<Any, Any>) {
+    switch (r) {
       case (#err(_)) { assert false };
-      case (#ok(_)) {};
+      case (#ok(_)) {}
     }
   };
 
   /// Asserts that its argument is an `#err` result, traps otherwise.
-  public func assertErr(r : Result<Any,Any>) {
-    switch(r) {
+  public func assertErr(r : Result<Any, Any>) {
+    switch (r) {
       case (#err(_)) {};
-      case (#ok(_)) assert false;
+      case (#ok(_)) assert false
     }
   };
 

@@ -26,12 +26,12 @@ module {
   /// @deprecated For large `Nat` values consider using a bespoke hash function that considers all of the argument's bits.
   public func hash(n : Nat) : Hash {
     let j = Prim.intToNat32Wrap(n);
-    hashNat8(
-      [j & (255 << 0),
-       j & (255 << 8),
-       j & (255 << 16),
-       j & (255 << 24)
-      ]);
+    hashNat8([
+      j & (255 << 0),
+      j & (255 << 8),
+      j & (255 << 16),
+      j & (255 << 24)
+    ])
   };
 
   /// @deprecated This function will be removed in future.
@@ -56,7 +56,6 @@ module {
     }
   };
 
-
   /// Jenkin's one at a time:
   ///
   /// https://en.wikipedia.org/wiki/Jenkins_hash_function#one_at_a_time
@@ -72,12 +71,12 @@ module {
     for (natOfKey in key.vals()) {
       hash := hash +% natOfKey;
       hash := hash +% hash << 10;
-      hash := hash ^ (hash >> 6);
+      hash := hash ^ (hash >> 6)
     };
     hash := hash +% hash << 3;
     hash := hash ^ (hash >> 11);
     hash := hash +% hash << 15;
-    return hash;
+    return hash
   };
 
 }

@@ -6,7 +6,7 @@ debug {
   type Trie<K, V> = Trie.Trie<K, V>;
   type Key<K> = Trie.Key<K>;
 
-  func key(t: Text) : Key<Text> { { key = t; hash = Text.hash t } };
+  func key(t : Text) : Key<Text> { { key = t; hash = Text.hash t } };
 
   let t0 : Trie<Text, Nat> = Trie.empty();
   let t1 : Trie<Text, Nat> = Trie.put(t0, key "hello", Text.equal, 42).0;
@@ -20,10 +20,10 @@ debug {
       var found = false;
       label here : () {
         for (y in b.vals()) {
-          if (eq(x, y)) { found := true; break here };
+          if (eq(x, y)) { found := true; break here }
         }
       };
-      if (not found) { return false };
+      if (not found) { return false }
     };
     return true
   };
@@ -34,5 +34,5 @@ debug {
   func equalKV(a : (Text, Nat), b : (Text, Nat)) : Bool { a == b };
   assert (isSubSet(actual, expected, equalKV));
   assert (isSubSet(expected, actual, equalKV));
-
-};
+  assert Trie.isValid(t2, false)
+}
