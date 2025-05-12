@@ -189,6 +189,25 @@ assert(?6 == concatenatedIter.next());
 assert(null == concatenatedIter.next());
 ```
 
+[[slice]]
+== slice
+
+[source.no-repl,motoko,subs=+macros]
+----
+func slice<A>(xs : xref:#type.Iter[Iter]<A>, limit : Nat, skip : Nat) : xref:#type.Iter[Iter]<A>
+----
+
+Consumes an iterator and returns a new iterator which produces a part (page) of the given iterator.
+```motoko
+import Iter "mo:base/Iter";
+let iter = Iter.range(1, 10);
+let page = Iter.slice(iter, 3, 5);
+assert(?6 == page.next());
+assert(?7 == page.next());
+assert(?8 == page.next());
+assert(null == page.next());
+```
+
 [[fromArray]]
 == fromArray
 
